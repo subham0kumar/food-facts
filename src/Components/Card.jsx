@@ -17,7 +17,7 @@ const Card = ({
         {product_name}
         <div className="author">
           {" "}
-          By <span className="name">Abi</span> 4 days ago
+          By <span className="name">Subham</span> 4 days ago
         </div>
       </div>
     </div>
