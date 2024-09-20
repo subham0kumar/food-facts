@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
 
-const Card = ({
+export const Card = ({
   ingredients,
   categories,
   nutrition_grade,
@@ -55,5 +55,3 @@ const Card = ({
     </article>
   );
 };
-
-export default Card;
