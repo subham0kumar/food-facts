@@ -3,14 +3,20 @@ import { SearchState } from "../Contexts/SearchContext";
 
 export const Search = () => {
   const { setSearch } = SearchState();
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  }
   return (
-    <div className="relative mt-6">
+    <div className="w-full relative mt-6">
+
       <input
         type="text"
-        placeholder="Search by Name"
-        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search by Name or Barcode"
+        onChange={handleSearch}
         className="text-white text-center block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 transition placeholder:text-neutral-500 focus:border-[#fefef477] focus:outline-none focus:ring-neutral-950/5"
+
       />
+
       {/* <div className="absolute inset-y-1 right-1 flex justify-end">
         <button
           onSubmit={handleSubmit}
