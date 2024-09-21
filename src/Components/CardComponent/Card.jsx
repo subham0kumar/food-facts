@@ -40,11 +40,11 @@ export const Card = ({
         </p>
       </section>
 
-      <footer class="card__footer">
-        <div class="card__job-summary">
-          <div class="card__job-icon"></div>
-          <div class="card__job">
-            <p class="card__job-title">{shortenedIngredients}</p>
+      <footer className="card__footer">
+        <div className="card__job-summary">
+          <div className="card__job-icon"></div>
+          <div className="card__job">
+            <p className="card__job-title">{shortenedIngredients}</p>
           </div>
         </div>
 

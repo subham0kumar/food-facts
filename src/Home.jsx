@@ -5,7 +5,7 @@ import { Search } from "./Components/Search";
 import { Card } from "./Components/CardComponent/Card";
 
 const Home = () => {
-  const {fetchDataOnSearch, search, products, fetchData, page, setPage, loading } = SearchState();
+  const { fetchDataOnSearch, search, products, fetchData, page, setPage, loading } = SearchState();
   useEffect(() => {
     fetchData();
   }, [page]);
@@ -14,30 +14,11 @@ const Home = () => {
     fetchDataOnSearch();
   }, [search]);
 
-  //Infinite Scroll
-  const handleInfiniteScroll = async () => {
-    try {
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
-      ) {
-        setPage((prev) => prev + 1);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", handleInfiniteScroll);
-    return () => {
-      window.removeEventListener("scroll", handleInfiniteScroll);
-    };
-  }, []);
 
   console.log(page);
   return (
     <div className="bg-[#251515] text-white p-10 flex flex-col items-center justify-center border-2 border-black">
-      <main className="min-h-screen">
+      <main className="min-h-screen grid place-items-center gap-10">
         <Search />
         <h1 className="text-center text-xl font-bold mb-10">Data</h1>
         <div className=" grid grid-cols-4 gap-10 items-start justify-start">
@@ -53,6 +34,7 @@ const Home = () => {
             />
           ))}
         </div>
+        <button className="border-2 border-[#fefef477] p-2 rounded-lg" onClick={() => setPage((prev) => prev + 1)}>Load More</button>
         {loading && (
           <span className="gap-10 flex flex-col items-center justify-center">
             <h1>Fetching Data</h1> <Loader />

@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
-import { productsByName } from "../Config/api";
 
 const searchContext = createContext();
 const SearchContext = ({ children }) => {
@@ -13,7 +12,7 @@ const SearchContext = ({ children }) => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${search}&json=true$page=${page}`
+        `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${search}&json=true&page=${page}`
       );
       setProducts((prev) => [...prev, ...data.products]);
     } catch (ex) {
@@ -21,6 +20,8 @@ const SearchContext = ({ children }) => {
     }
     setLoading(false);
   };
+
+
   const fetchDataOnSearch = async () => {
     setLoading(true);
     try {
