@@ -25,7 +25,7 @@ const SearchContext = ({ children }) => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `https://world.openfoodfacts.org/category/${category}.json&page=${page}`
+        `https://world.openfoodfacts.org/category/${category}?lang=en.json&page=${page}`
       );
       setProducts((prev) => [...prev, ...data.products]);
     } catch (ex) {
@@ -39,7 +39,7 @@ const SearchContext = ({ children }) => {
     setLoading(true);
     try {
       console.log(debouncedSearch)
-      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${debouncedSearch}&json=1&page=${page}`;
+      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${debouncedSearch}?lang=en&json=1&page=${page}`;
       if (!url) {
         throw new Error('Invalid URL generated');
       }
@@ -57,7 +57,7 @@ const SearchContext = ({ children }) => {
     setLoading(true);
     try {
       console.log(code);
-      const url = `https://world.openfoodfacts.org/api/v0/product/${code}.json`;
+      const url = `https://world.openfoodfacts.org/api/v0/product/${code}?lang=en.json`;
       if (!url) {
         throw new Error('Invalid URL generated');
       }

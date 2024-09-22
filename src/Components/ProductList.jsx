@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { SearchState } from "../Contexts/SearchContext";
-import { Card } from "./CardComponent/Card";
+import Card2 from "./CardComponent/Card2";
 import { Loader } from "./Loader/Loader";
 
 const ProductList = () => {
@@ -25,17 +25,17 @@ const ProductList = () => {
   }, [debouncedCode]);
 
   return (
-    <> 
+    <>
       <div className="grid grid-cols-4 gap-10">
         {products.map((item, index) => (
-          <Card
+          <Card2
             key={index}
             id={item._id || item.id}
             product_name={item.product_name}
             img_url={item.image_front_url || item.image_url}
             nutrition_grade={item.nutrition_grades}
-            categories={item.categories}
-            ingredients={item.ingredients_text}
+            categories={item.categories_old }
+            ingredients={item.ingredients_text_en}
           />
         ))}
       </div>
@@ -45,8 +45,8 @@ const ProductList = () => {
         </span>
       )}
       {!debouncedCode && !debouncedSearch && (
-        <button 
-          className="mt-16 border-2 border-[#fefef477] p-2 rounded-lg" 
+        <button
+          className="mt-16 border-2 border-[#fefef477] p-2 rounded-lg"
           onClick={() => setPage((prev) => prev + 1)}
         >
           Load More

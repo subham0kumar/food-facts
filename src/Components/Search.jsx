@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SearchState } from "../Contexts/SearchContext";
+import SearchBar from "./SearchBar";
 
 export const Search = () => {
   const { setSearch } = SearchState();
@@ -11,23 +12,9 @@ export const Search = () => {
     setCodeSearch(e.target.value);
   }
   return (
-    <div className="w-full relative mt-6">
-
-      <input
-        type="text"
-        placeholder="Search by Name"
-        onChange={handleSearch}
-        className="text-white text-center block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 transition placeholder:text-neutral-500 focus:border-[#fefef477] focus:outline-none focus:ring-neutral-950/5"
-
-      />
-      <input
-        type="text"
-        placeholder="Search by Barcode"
-        onChange={handleCodeSearch}
-        className="text-white text-center block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 transition placeholder:text-neutral-500 focus:border-[#fefef477] focus:outline-none focus:ring-neutral-950/5"
-
-      />
-
+    <div className="w-full flex relative mt-6">
+      <SearchBar placeholder="Search by Name" handleChange={handleSearch} />
+      <SearchBar placeholder="Search by Barcode" handleChange={handleCodeSearch} />
     </div>
   );
 };
