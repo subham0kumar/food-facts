@@ -26,7 +26,7 @@ const ProductList = () => {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-10">
+      <div className="w-full grid grid-cols-4 gap-10">
         {products.map((item, index) => (
           <Card2
             key={index}
@@ -40,8 +40,7 @@ const ProductList = () => {
         ))}
       </div>
       {loading && (
-        <span className="gap-10 flex flex-col items-center justify-center">
-          <h1>Fetching Data</h1> <Loader />
+        <span className="gap-10 flex flex-col items-center justify-center"> <Loader />
         </span>
       )}
       {!debouncedCode && !debouncedSearch && (

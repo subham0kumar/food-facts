@@ -27,7 +27,7 @@ function CategoryFilter({ onCategoryChange }) {
   return (
     <div className="category-filter">
       <h3>Filter by Category</h3>
-      <select value={selectedCategory} onChange={handleCategoryChange}>
+      <select className='bg-gray-900 text-gray-200' value={selectedCategory} onChange={handleCategoryChange}>
         <option value="">All Categories</option>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>

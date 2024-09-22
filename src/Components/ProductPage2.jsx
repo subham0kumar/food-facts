@@ -27,31 +27,30 @@ export default function ProductPage2() {
 
     const getGradeClass = (grade) => {
         const grades = {
-          a: 'bg-green-500',
-          b: 'bg-lime-500',
-          c: 'bg-yellow-500',
-          d: 'bg-orange-500',
-          e: 'bg-red-500'
+            a: 'bg-green-500',
+            b: 'bg-lime-500',
+            c: 'bg-yellow-500',
+            d: 'bg-orange-500',
+            e: 'bg-red-500'
         }
         return grades[grade.toLowerCase()] || 'bg-gray-400'
-      }
+    }
 
-    // const createNutritionTable = (nutriments) => {
-    //     return [
-    //         { name: 'Energy', value: nutriments.energy_100g, unit: 'kcal' },
-    //         { name: 'Fat', value: nutriments.fat_100g, unit: 'g' },
-    //         { name: 'Saturated Fat', value: nutriments['saturated-fat_100g'], unit: 'g' },
-    //         { name: 'Carbohydrates', value: nutriments.carbohydrates_100g, unit: 'g' },
-    //         { name: 'Sugars', value: nutriments.sugars_100g, unit: 'g' },
-    //         { name: 'Fiber', value: nutriments.fiber_100g, unit: 'g' },
-    //         { name: 'Proteins', value: nutriments.proteins_100g, unit: 'g' },
-    //         { name: 'Salt', value: nutriments.salt_100g, unit: 'g' },
-    //     ]
-    // }
+    // Create an array of nutriment objects
+    const nutriments = singleProduct.nutriments || {};
+    const nutrimentArray = [
+        { name: 'Energy', value: nutriments.energy_100g, unit: 'kcal' },
+        { name: 'Carbohydrates', value: nutriments.carbohydrates_100g, unit: 'g' },
+        { name: 'Fat', value: nutriments.fat_100g, unit: 'g' },
+        { name: 'Proteins', value: nutriments.proteins_100g, unit: 'g' },
+        { name: 'Salt', value: nutriments.salt_100g, unit: 'g' },
+        { name: 'Fiber', value: nutriments.fiber_100g, unit: 'g' },
+        // Add more nutriments as needed
+    ].map(item => ({
+        ...item,
+        value: item.value !== undefined ? Number(item.value).toFixed(2) : 'N/A'
+    }));
 
-    // const nutritionData = singleProduct.nutriments.energy_100g
-
-    console.log(singleProduct.nutriments)
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
             <div className="max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
@@ -93,19 +92,14 @@ export default function ProductPage2() {
                     </div>
                     <div className="mt-8">
                         <h2 className="text-2xl font-semibold mb-4 text-gray-200">Nutritional Values (per 100g)</h2>
-                        {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                            {nutritionData?.map((nutrient, index) => (
-                                <div
-                                    key={nutrient.name}
-                                    className="bg-gray-700 p-4 rounded-lg text-center"
-                                >
-                                    <p className="text-gray-400">{nutrient.name}</p>
-                                    <p className="text-xl font-bold text-gray-100">
-                                        {nutrient.value ? nutrient.value.toFixed(1) : 'N/A'} {nutrient.unit}
-                                    </p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            {nutrimentArray.map((nutriment, index) => (
+                                <div key={index} className="bg-gray-700 p-4 rounded-lg">
+                                    <h3 className="text-lg font-semibold mb-2">{nutriment.name}</h3>
+                                    <p>{nutriment.value} {nutriment.unit}</p>
                                 </div>
                             ))}
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>

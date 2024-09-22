@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import ProductList from './Components/ProductList';
-import CategoryFilter from './Components/CategoryFilter';
-import Home from "./Home";
 import { Route, Routes } from "react-router-dom";
-import ProductPage from "./Components/ProductPage";
 import ProductPage2 from './Components/ProductPage2';
+import Home from "./Home";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -15,7 +12,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App bg-gray-950">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductPage2 />} />
