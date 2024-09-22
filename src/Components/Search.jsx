@@ -6,26 +6,28 @@ export const Search = () => {
   const handleSearch = (e) => {
     setSearch(e.target.value);
   }
+  const { setCodeSearch } = SearchState();
+  const handleCodeSearch = (e) => {
+    setCodeSearch(e.target.value);
+  }
   return (
     <div className="w-full relative mt-6">
 
       <input
         type="text"
-        placeholder="Search by Name or Barcode"
+        placeholder="Search by Name"
         onChange={handleSearch}
         className="text-white text-center block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 transition placeholder:text-neutral-500 focus:border-[#fefef477] focus:outline-none focus:ring-neutral-950/5"
 
       />
+      <input
+        type="text"
+        placeholder="Search by Barcode"
+        onChange={handleCodeSearch}
+        className="text-white text-center block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 transition placeholder:text-neutral-500 focus:border-[#fefef477] focus:outline-none focus:ring-neutral-950/5"
 
-      {/* <div className="absolute inset-y-1 right-1 flex justify-end">
-        <button
-          onSubmit={handleSubmit}
-          type="submit"
-          className="flex aspect-square h-full items-center justify-center rounded-xl bg-[#fefe4eb9] text-white transition hover:bg-[#fefe4e99]"
-        >
-          <h1>🔍</h1>
-        </button>
-      </div> */}
+      />
+
     </div>
   );
 };
