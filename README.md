@@ -7,10 +7,10 @@
 2. [Technologies](#2-technologies)
 3. [Project Structure](#3-project-structure)
 4. [Features](#4-features)
-5. [API Integration](#5-api-integration)
-6. [State Management](#6-state-management)
-7. [UI Design](#7-ui-design)
-8. [Detailed Feature Explanations](#8-detailed-feature-explanations)
+5. [Detailed Feature Explanations](#5-detailed-feature-explanations)
+6. [API Integration](#6-api-integration)
+7. [State Management](#7-state-management)
+8. [UI Design](#8-ui-design)
 9. [Deployment](#9-deployment)
 
 ## 1. Introduction
@@ -85,53 +85,11 @@ Displays detailed information about a specific product, including:
 - Nutritional values per 100g
 - Product labels (e.g., "No gluten," "No preservatives")
 
-## 5. API Integration
+## 5. Detailed Feature Explanations
 
-### 5.1 Main API Endpoints
-- Fetch all products: `https://world.openfoodfacts.org/category/-.json&page=${page}`
-- Search products by name: `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${debouncedSearch}&json=1&page=${page}`
-- Get product details by barcode: `https://world.openfoodfacts.org/api/v0/product/${encodeURIComponent(code)}.json`
-- Fetch categories: `https://world.openfoodfacts.org/categories.json`
-- Fetch products by category: `https://world.openfoodfacts.org/category/${selectedCategory}.json&page=${page}`
+### 5.1 Searching
 
-### 5.2 API Functions
-- `fetchData`: Fetches initial product data
-- `fetchDataOnNameSearch`: Searches products by name
-- `fetchDataOnCodeSearch`: Searches products by barcode
-- `fetchDataByCategory`: Fetches products by category
-
-## 6. State Management
-
-### 6.1 SearchContext
-A custom React context for managing global state and functions related to search and data fetching.
-
-### 6.2 Custom Hooks
-- `useDebounce`: Implements debounce functionality for search inputs to optimize API calls.
-
-## 7. UI Design
-
-### 7.1 General Design Principles
-- Dark theme for reduced eye strain
-- Minimalistic and intuitive layout
-- Consistent color scheme (dark backgrounds with blue accents)
-- Responsive design for various screen sizes
-
-### 7.2 Home Page Design
-- Clear title and purpose
-- Prominent search fields
-- Card layout for product display
-- Interactive elements (dropdowns and buttons) for sorting and filtering
-
-### 7.3 Product Page Design
-- Detailed nutritional information
-- Clear presentation of product labels
-- Consistent styling with the home page
-
-## 8. Detailed Feature Explanations
-
-### 8.1 Searching
-
-#### 8.1.1 Search by Name
+#### 5.1.1 Search by Name
 - **Implementation**: Uses the `fetchDataOnNameSearch` function.
 - **API Endpoint**: `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${debouncedSearch}&json=1&page=${page}`
 - **Functionality**:
@@ -141,7 +99,7 @@ A custom React context for managing global state and functions related to search
   - Fetches results using a useEffect hook in the ProductList component.
   - Supports pagination with the `page` parameter for loading more results.
 
-#### 8.1.2 Search by Barcode
+#### 5.1.2 Search by Barcode
 - **Implementation**: Uses the `fetchDataOnCodeSearch` function.
 - **API Endpoint**: `https://world.openfoodfacts.org/api/v0/product/${encodeURIComponent(code)}.json`
 - **Functionality**:
@@ -149,7 +107,7 @@ A custom React context for managing global state and functions related to search
   - Encodes the barcode to ensure proper URL formatting.
   - Fetches detailed information for a specific product.
 
-### 8.2 Debouncing
+### 5.2 Debouncing
 - **Implementation**: Custom hook `useDebounce`
 - **Purpose**: To optimize API calls and prevent overwhelming the server with too many requests.
 - **Functionality**:
@@ -157,9 +115,9 @@ A custom React context for managing global state and functions related to search
   - Allows users to type their full search term without triggering multiple unnecessary API requests.
   - Applied to both name and barcode search functionalities.
 
-### 8.3 Filtering
+### 5.3 Filtering
 
-#### 8.3.1 Category Filtering
+#### 5.3.1 Category Filtering
 - **Implementation**: Uses the `fetchDataByCategory` function.
 - **API Endpoints**:
   - For category list: `https://world.openfoodfacts.org/categories.json`
@@ -170,7 +128,7 @@ A custom React context for managing global state and functions related to search
   - When a category is selected, it fetches products specific to that category.
   - Supports pagination for loading more products within the selected category.
 
-### 8.4 Sorting
+### 5.4 Sorting
 - **Implementation**: Client-side sorting using JavaScript array methods.
 - **Sorting Options**:
   1. By Name: A-Z or Z-A
@@ -183,7 +141,7 @@ A custom React context for managing global state and functions related to search
   - For reverse order, applies `array.reverse()` after sorting.
   - Sorting is performed on the client-side, meaning it doesn't require additional API calls.
 
-### 8.5 Load More Functionality
+### 5.5 Load More Functionality
 - **Implementation**: Utilizes the `page` parameter in API calls.
 - **Functionality**:
   - A "Load More" button is displayed at the bottom of the product list.
@@ -192,7 +150,7 @@ A custom React context for managing global state and functions related to search
   - Appends new products to the existing list, creating a continuous scrolling effect.
   - Works across different features (search, category filtering) by including the `page` parameter in respective API calls.
 
-### 8.6 Product Details Page
+### 5.6 Product Details Page
 - **Implementation**: Uses React Router and the `useParams` hook.
 - **Functionality**:
   - Extracts the product's barcode from the URL parameters.
@@ -202,6 +160,48 @@ A custom React context for managing global state and functions related to search
     - Nutritional values per 100g
     - Product labels (e.g., "No gluten," "No preservatives")
   - Presents information in a user-friendly, visually appealing layout.
+
+## 6. API Integration
+
+### 6.1 Main API Endpoints
+- Fetch all products: `https://world.openfoodfacts.org/category/-.json&page=${page}`
+- Search products by name: `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${debouncedSearch}&json=1&page=${page}`
+- Get product details by barcode: `https://world.openfoodfacts.org/api/v0/product/${encodeURIComponent(code)}.json`
+- Fetch categories: `https://world.openfoodfacts.org/categories.json`
+- Fetch products by category: `https://world.openfoodfacts.org/category/${selectedCategory}.json&page=${page}`
+
+### 6.2 API Functions
+- `fetchData`: Fetches initial product data
+- `fetchDataOnNameSearch`: Searches products by name
+- `fetchDataOnCodeSearch`: Searches products by barcode
+- `fetchDataByCategory`: Fetches products by category
+
+## 7. State Management
+
+### 7.1 SearchContext
+A custom React context for managing global state and functions related to search and data fetching.
+
+### 7.2 Custom Hooks
+- `useDebounce`: Implements debounce functionality for search inputs to optimize API calls.
+
+## 8. UI Design
+
+### 8.1 General Design Principles
+- Dark theme for reduced eye strain
+- Minimalistic and intuitive layout
+- Consistent color scheme (dark backgrounds with blue accents)
+- Responsive design for various screen sizes
+
+### 8.2 Home Page Design
+- Clear title and purpose
+- Prominent search fields
+- Card layout for product display
+- Interactive elements (dropdowns and buttons) for sorting and filtering
+
+### 8.3 Product Page Design
+- Detailed nutritional information
+- Clear presentation of product labels
+- Consistent styling with the home page
 
 ## 9. Deployment
 The Every Food Facts website is deployed and publicly accessible. Here are the key details:
