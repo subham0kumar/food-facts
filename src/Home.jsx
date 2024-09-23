@@ -1,17 +1,15 @@
 import React from "react";
-import { Search } from "./Components/Search";
-import ProductList from "./Components/ProductList";
 import Navbar from "./Components/Navbar";
-import CategoryFilter from "./Components/CategoryFilter";
+import ProductList from "./Components/ProductList";
+import { Search } from "./Components/Search";
 
 const Home = () => {
   return (
     <>
       <Navbar />
       <div className="pt-24 text-white p-10 flex flex-col items-center justify-center">
-        <main className="min-h-screen grid place-items-center">
+        <main className="w-full min-h-screen grid items-start justify-center">
           <Search />
-          {/* <CategoryFilter /> */}
           <ProductList />
         </main>
       </div>
