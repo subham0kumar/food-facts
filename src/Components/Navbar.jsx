@@ -10,7 +10,10 @@ const Navbar = () => {
             <h1 className='w-2/3 lg:ml-10 text-center text-gray-200 text-3xl font-bold'>
                 Every Food Facts
             </h1>
-            <button className='hover:bg-gray-800 text-gray-200 bg-gray-900 px-5 py-2 rounded-lg font-bold'>
+            <button
+                className='hover:bg-gray-800 text-gray-200 bg-gray-900 px-5 py-2 rounded-lg font-bold'
+                onClick={() => window.open('https://github.com/subham0kumar/food-facts', '_blank')}
+            >
                 Go to Github
             </button>
         </nav>
