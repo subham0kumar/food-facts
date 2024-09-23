@@ -19,19 +19,16 @@ Every Food Facts is a web application that provides users with detailed informat
 
 ## 2. Technologies
 
-### 2.1 Front-end
-- React.js
+### Front-end - React.js
 
-### 2.2 Styling
-- TailwindCSS
+### Styling - TailwindCSS
 
-### 2.3 API Integration
-- OpenFoodFacts API
+### API Integration - OpenFoodFacts API
 
-### 2.4 State Management
-- React Hooks (useState, useEffect, useContext)
+### State Management
+- React Hooks (useState, useEffect, useContext, useParams)
 - Custom Hooks (useDebounce)
-- React Context API (optional, for global state management)
+- React Context API (SearchContext, for global state management)
 
 ## 3. Project Structure
 
@@ -40,11 +37,18 @@ The project consists of two main pages:
 1. Home Page
 2. Product Details Page
 
-### 3.1 Reusable Components
+### Reusable Components
 - Loader
 - Search Bar
 - Card Component
 - Navbar
+
+### Other Components
+- ProductList
+- Search 
+- CategoryFilter
+- SortByName
+- SortByNutritionalGrade
 
 ## 4. Features
 
