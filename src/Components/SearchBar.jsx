@@ -5,7 +5,7 @@ export default function SearchBar({ handleChange, placeholder }) {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
-        <div className="bg-gray-950 w-1/2 flex items-center justify-center p-8">
+        <div className=" w-1/2 flex items-center justify-center p-8">
             <div
                 className={`w-full h-12 relative overflow-hidden rounded-lg shadow-md transition-all duration-300 ${isFocused ? 'bg-gradient-to-r from-gray-800 to-gray-700' : 'bg-gradient-to-r from-gray-900 to-gray-800'
                     }`}
