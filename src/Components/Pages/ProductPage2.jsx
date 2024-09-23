@@ -20,7 +20,7 @@ export default function ProductPage2() {
         return <div>Product not found</div>;
     }
 
-    const displayNutritionGrade = singleProduct.nutrition_grade ? singleProduct.nutrition_grade.toUpperCase() : "NOS";
+    const displayNutritionGrade = singleProduct.nutrition_grades ? singleProduct.nutrition_grades.toUpperCase() : "NOS";
 
     const getGradeClass = (grade) => {
         const grades = {
