@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { SearchState } from '../Contexts/SearchContext';
-import { Loader } from './Loader/Loader';
-import Navbar from './Navbar';
-
+import { SearchState } from '../../Contexts/SearchContext';
+import { Loader } from '../Loader/Loader';
+import Navbar from '../Navbar';
 
 export default function ProductPage2() {
-    // const [product, setProduct] = useState(null)
-    // const [loading, setLoading] = useState(true)
-    // const [error, setError] = useState(null)
-
     const { id } = useParams();
     const { fetchDataOnCodeSearch, singleProduct, loading } = SearchState();
 
     useEffect(() => {
-        fetchDataOnCodeSearch(id, true);  // Pass true to indicate it's for a product page
+        fetchDataOnCodeSearch(id, true);
     }, [id]);
 
     if (loading) {
@@ -24,6 +19,7 @@ export default function ProductPage2() {
     if (!singleProduct) {
         return <div>Product not found</div>;
     }
+
     const displayNutritionGrade = singleProduct.nutrition_grade ? singleProduct.nutrition_grade.toUpperCase() : "NOS";
 
     const getGradeClass = (grade) => {
@@ -33,11 +29,10 @@ export default function ProductPage2() {
             c: 'bg-yellow-500',
             d: 'bg-orange-500',
             e: 'bg-red-500'
-        }
-        return grades[grade.toLowerCase()] || 'bg-gray-400'
-    }
+        };
+        return grades[grade.toLowerCase()] || 'bg-gray-400';
+    };
 
-    // Create an array of nutriment objects
     const nutriments = singleProduct.nutriments || {};
     const nutrimentArray = [
         { name: 'Energy', value: nutriments.energy_100g, unit: 'kcal' },
@@ -46,15 +41,15 @@ export default function ProductPage2() {
         { name: 'Proteins', value: nutriments.proteins_100g, unit: 'g' },
         { name: 'Salt', value: nutriments.salt_100g, unit: 'g' },
         { name: 'Fiber', value: nutriments.fiber_100g, unit: 'g' },
-        // Add more nutriments as needed
     ].map(item => ({
         ...item,
         value: item.value !== undefined ? Number(item.value).toFixed(2) : 'N/A'
     }));
 
     return (
-        <> <Navbar />
-            <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
+        <>
+            <Navbar />
+            <div className="pt-32 min-h-screen bg-gray-900 text-gray-100 lg:p-16 px-8">
                 <div className="mt-24 max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
                     <div className="p-8">
                         <div className="grid md:grid-cols-2 gap-8">
@@ -73,7 +68,7 @@ export default function ProductPage2() {
                                 </div>
                                 <div className="flex items-center space-x-4">
                                     <div className={`w-16 h-16 ${getGradeClass(displayNutritionGrade)} rounded-full flex items-center justify-center`}>
-                                        <span className="text-2xl font-bold text-white">{displayNutritionGrade.toUpperCase()}</span>
+                                        <span className="text-2xl font-bold text-white">{displayNutritionGrade}</span>
                                     </div>
                                     <p className="text-lg text-gray-300">Nutrition Grade</p>
                                 </div>

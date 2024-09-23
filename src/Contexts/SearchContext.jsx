@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 import { useDebounce } from "../Hooks/UseDebounce";
 
-// Create a context for search-related state and functions
+// Created a context for search
 const searchContext = createContext();
 
 const SearchContext = ({ children }) => {
@@ -16,11 +16,11 @@ const SearchContext = ({ children }) => {
   const [productAvailable, setProductAvailable] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // Debounced search values to reduce API calls
+  // Debounced values for search and code search
   const debouncedSearch = useDebounce(search, 500);
   const debouncedCode = useDebounce(codeSearch, 500);
 
-  // Fetch products by category
+  // Fetch data for all products
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -34,6 +34,7 @@ const SearchContext = ({ children }) => {
     setLoading(false);
   };
 
+  // Fetch data by selected category
   const fetchDataByCategory = async () => {
     setLoading(true);
     setProducts([]);
@@ -50,12 +51,12 @@ const SearchContext = ({ children }) => {
     }
   };
 
-  // Fetch products based on search term
+  // Fetch data based on search input
   const fetchDataOnSearch = async () => {
     setLoading(true);
-    setProducts([]); // Clear the product list before fetching
+    setProducts([]);
     try {
-      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(debouncedSearch)}&json=1&page=${page}`;
+      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${debouncedSearch}&json=1&page=${page}`;
       const { data } = await axios.get(url);
       setProducts(data.products || []);
     } catch (ex) {
@@ -66,39 +67,33 @@ const SearchContext = ({ children }) => {
     }
   };
 
-  // Fetch a single product by barcode
+  // Fetch data based on product code
   const fetchDataOnCodeSearch = async (code, isProductPage = false) => {
     setLoading(true);
-    setProducts([]); // Clear the product list before fetching
-    setSingleProduct(null); // Clear the single product before fetching
-    setProductAvailable(true); // Reset product availability
+    setProducts([]);
+    setSingleProduct(null);
+    setProductAvailable(true);
 
     try {
       const url = `https://world.openfoodfacts.org/api/v0/product/${encodeURIComponent(code)}.json`;
-      console.log("Fetching from URL:", url);
       const response = await axios.get(url);
-      console.log("API Response:", response.data);
 
       if (response.data && response.data.status === 1 && response.data.product) {
-        console.log("Product found:", response.data.product);
         setSingleProduct(response.data.product);
         if (!isProductPage) {
           setProducts([response.data.product]);
         }
       } else {
-        console.log("Product not found or invalid response");
         setProductAvailable(false);
       }
     } catch (ex) {
       console.error("Error fetching data:", ex);
-      console.error("Error details:", ex.response ? ex.response.data : "No response data");
       setProductAvailable(false);
     } finally {
       setLoading(false);
     }
   };
 
-  // Provide the context value to children components
   return (
     <searchContext.Provider
       value={{
@@ -130,6 +125,4 @@ const SearchContext = ({ children }) => {
 export default SearchContext;
 
 // Custom hook to use the search context
-export const SearchState = () => {
-  return useContext(searchContext);
-};
+export const SearchState = () => useContext(searchContext);

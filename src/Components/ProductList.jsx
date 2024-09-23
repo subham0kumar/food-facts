@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { SearchState } from "../Contexts/SearchContext";
-import Card2 from "./CardComponent/Card2";
+import Card2 from "./Util/Card2";
 import { Loader } from "./Loader/Loader";
-import SortByName from "./SortByName";
-import SortByNutritionalGrade from "./SortByNutritionalGrade";
-import CategoryFilter from "./CategoryFilter";
+import SortByName from "./Util/SortByName";
+import SortByNutritionalGrade from "./Util/SortByNutritionalGrade";
+import CategoryFilter from "./Util/CategoryFilter";
 
 const ProductList = () => {
   const {
@@ -22,9 +22,11 @@ const ProductList = () => {
     selectedCategory,
     setSelectedCategory
   } = SearchState();
+
   const [sortedProducts, setSortedProducts] = useState([]);
   const [sortType, setSortType] = useState("");
   const [sortOrder, setSortOrder] = useState("");
+
   useEffect(() => {
     if (!debouncedSearch && !debouncedCode) {
       fetchData();
@@ -36,7 +38,6 @@ const ProductList = () => {
       fetchDataByCategory();
     }
   }, [selectedCategory]);
-
 
   useEffect(() => {
     if (debouncedSearch) {
@@ -83,12 +84,12 @@ const ProductList = () => {
 
   return (
     <>
-      <div className="w-full flex flex-col lg:flex-row md:flex-col gap-4 justify-center mb-4">
+      <div className="bg-transparent w-full flex flex-col gap-4 items-center justify-center lg:flex-row relative mt-6">
         <SortByName onSort={(order) => handleSort("name", order)} />
         <SortByNutritionalGrade onSort={(order) => handleSort("nutritionalGrade", order)} />
         <CategoryFilter onCategoryChange={handleCategoryChange} />
       </div>
-      <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 justfy-center px-5 gap-10">
+      <div className="w-full mt-10 grid md:grid-cols-2 lg:grid-cols-4 justify-center px-5 gap-10">
         {sortedProducts.map((item, index) => (
           <Card2
             key={index}

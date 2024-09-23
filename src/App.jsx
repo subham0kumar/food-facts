@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import ProductPage2 from './Components/ProductPage2';
-import Home from "./Home";
+import ProductPage2 from './Components/Pages/ProductPage2';
+import Home from "./Components/Pages/Home";
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState('');
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    // You might want to trigger a new product search here with the selected category
-  };
-
   return (
     <div className="App bg-gray-950">
       <Routes>

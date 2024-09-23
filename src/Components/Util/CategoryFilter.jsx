@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { SearchState } from '../Contexts/SearchContext';
+import { SearchState } from '../../Contexts/SearchContext';
 
 function CategoryFilter({ onCategoryChange }) {
   const [categories, setCategories] = useState([]);
   const { selectedCategory, setSelectedCategory } = SearchState();
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('https://world.openfoodfacts.org/categories.json');
+        setCategories(response.data.tags);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
     fetchCategories();
   }, []);
-
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get('https://world.openfoodfacts.org/categories.json');
-      setCategories(response.data.tags);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    }
-  };
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
@@ -26,16 +25,16 @@ function CategoryFilter({ onCategoryChange }) {
   };
 
   return (
-    <div className="lg:w-[40%] w-1/2 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gray-800 text-white">
-      <h3>Filter by Category</h3>
+    <div className="w-full lg:w-[40%] gap-5 flex items-center justify-start px-8 py-4 lg:p-8">
+      <h3>Category:</h3>
       <select
-        className='px-4 py-2 rounded-lg bg-gray-800 text-white'
+        className="w-full p-2 text-center rounded-lg bg-gray-700 text-white"
         value={selectedCategory}
         onChange={handleCategoryChange}
       >
         <option value="-">All Categories</option>
         {categories.map((category) => (
-          <option key={category.id} value={category.id}>
+          <option className='truncate' key={category.id} value={category.id}>
             {category.name}
           </option>
         ))}

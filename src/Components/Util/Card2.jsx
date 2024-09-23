@@ -12,23 +12,13 @@ export default function Card2({
     const [imageError, setImageError] = useState(false);
     const navigate = useNavigate();
 
-    const shortenedIngredients = ingredients
-        ? ingredients.length > 75
-            ? `${ingredients.substring(0, 50)}...`
-            : ingredients
-        : "Unknown";
-
-    const shortenedCategories = categories
-        ? categories.length > 75
-            ? `${categories.substring(0, 50)}...`
-            : categories
-        : "Unknown";
+    const shortenedText = (text, maxLength = 75) =>
+        text ? (text.length > maxLength ? `${text.substring(0, 50)}...` : text) : "Unknown";
 
     const displayNutritionGrade = nutrition_grade ? nutrition_grade.toUpperCase() : "NOS";
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log('Link clicked');
         navigate(`/product/${id}`);
     };
 
@@ -62,18 +52,18 @@ export default function Card2({
             </div>
             <div className="absolute bottom-0 left-0 w-full h-1/2 p-4 flex flex-col justify-between">
                 <div>
-                    <h2 className="text-lg font-semibold mb-2 mr-16 ">{product_name}</h2>
+                    <h2 className="text-lg font-semibold mb-2 mr-16">{product_name}</h2>
                     <p className="mt-4 text-xs text-gray-400 line-clamp-3 flex gap-2">
-                        <span className='font-bold'>Ingredients:</span> {shortenedIngredients}
+                        <span className='font-bold'>Ingredients:</span> {shortenedText(ingredients)}
                     </p>
                     <p className="text-xs text-gray-400 line-clamp-3 pt-2 flex gap-2">
-                        <span className='font-bold'>Category:</span> {shortenedCategories}
+                        <span className='font-bold'>Category:</span> {shortenedText(categories)}
                     </p>
                 </div>
                 <div className="text-xs text-gray-400 mt-2">ID: {id}</div>
 
                 <button
-                    className="absolute top-2 right-2 group-hover:-rotate-45 group-hover:bg-gray-200 rounded-full p-2 w-12 h-12 transition-all duration-300 ease-in-out"
+                    className="absolute top-2 right-2 lg:rotate-0 -rotate-45 lg:bg-transparent bg-gray-950 group-hover:-rotate-45 group-hover:bg-gray-950 rounded-full p-2 w-12 h-12 transition-all duration-300 ease-in-out"
                 >
                     <svg
                         style={{ color: "#3f37e0" }}
